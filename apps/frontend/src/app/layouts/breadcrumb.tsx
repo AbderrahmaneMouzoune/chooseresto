@@ -40,7 +40,7 @@ import type {
 
 const ITEMS_TO_DISPLAY = 3;
 
-export function BreadcrumbResponsive() {
+export default function BreadcrumbResponsive() {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const segments = useSelectedLayoutSegments();

@@ -5,7 +5,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@public/*": ["public/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@layouts/*": ["src/app/layouts/*"]
     },
     "plugins": [{ "name": "next" }]
   },

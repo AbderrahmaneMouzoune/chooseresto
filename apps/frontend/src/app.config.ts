@@ -3,12 +3,11 @@ import type { Metadata } from "next";
 
 export const APP_CONFIG = {
   name: "chooseresto",
-  creator: "Ahmed MOUZOUNE",
+  creator: "Abderrahmane MOUZOUNE",
   website: (env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000") as string,
   twitter: "@abderrahmane_js",
   authors: [
     { name: "Abderrahmane MOUZOUNE", url: "https://abderrahmanemouzoune.com" },
-    { name: "Ahmed MOUZOUNE", url: "https://ahmedmouzoune.com" },
   ],
 };
 
@@ -18,8 +17,7 @@ export const FALLBACK_SEO: Metadata = {
   creator: APP_CONFIG.creator,
   title: APP_CONFIG.name,
   openGraph: {
-    title:
-      "chooseresto the fastest & safest way to start an Strapi + Nextjs project",
+    title: "chooseresto find the next place to eat!",
     url: new URL(APP_CONFIG.website),
     siteName: APP_CONFIG.name,
     images: [

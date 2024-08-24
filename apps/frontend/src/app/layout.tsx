@@ -1,15 +1,14 @@
 import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata, Viewport } from "next";
 
-import Footer from "@/app/shared/footer";
-import Header from "@/app/shared/header";
-
 import { FALLBACK_SEO } from "@/app.config";
 import { lexend } from "@/app/fonts";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
-import { BreadcrumbResponsive } from "./layouts/breadcrumb";
+import BreadcrumbResponsive from "@layouts/breadcrumb";
+import Footer from "@layouts/footer";
+import Header from "@layouts/header";
 
 export const metadata: Metadata = {
   ...FALLBACK_SEO,
