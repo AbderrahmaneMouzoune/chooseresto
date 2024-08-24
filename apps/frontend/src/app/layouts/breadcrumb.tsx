@@ -4,7 +4,6 @@ import Link from "next/link";
 import * as React from "react";
 
 import { APP_CONFIG } from "@/app.config";
-import { useMediaQuery } from "@/hooks/use-media-query";
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -31,6 +30,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu";
+import { useMediaQuery } from "@hooks/use-media-query";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { useCallback } from "react";
 import type {

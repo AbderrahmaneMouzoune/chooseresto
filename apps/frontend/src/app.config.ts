@@ -1,5 +1,5 @@
 import { env } from "@/env.mjs";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 export const APP_CONFIG = {
   name: "chooseresto",
@@ -31,4 +31,15 @@ export const FALLBACK_SEO: Metadata = {
     locale: "fr_FR",
     type: "website",
   },
+};
+
+export const DEFAULT_VIEWPORT: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#ffffff" },
+  ],
 };

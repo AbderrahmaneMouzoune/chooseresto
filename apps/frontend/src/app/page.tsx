@@ -1,5 +1,5 @@
+import CreateRoom from "@/app/layouts/create-room";
 import { Headline } from "@components/ui/headline";
-import CreateProfile from "@layouts/create-profile";
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
         Tinder restaurant
       </Headline>
 
-      <CreateProfile />
+      <CreateRoom />
     </main>
   );
 }
