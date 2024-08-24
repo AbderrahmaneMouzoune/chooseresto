@@ -29,7 +29,7 @@ const formSchema = z.object({
   address: z.string().min(5).max(100),
 });
 
-export default function RestaurantGenerator() {
+export default function RoomLocalisation() {
   const [places, setPlaces] = useState<GeocodeMaps[]>([]);
   const { updateLocation, getLocation } = useGeoLocation();
 
@@ -63,6 +63,7 @@ export default function RestaurantGenerator() {
       <DrawerHeader>
         <DrawerTitle>Entrez votre localisation</DrawerTitle>
       </DrawerHeader>
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
           <FormField

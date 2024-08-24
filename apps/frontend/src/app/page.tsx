@@ -1,4 +1,4 @@
-import CreateRoom from "@/components/layouts/create-room";
+import RoomCreate from "@/app/_room/room-create";
 import { Headline } from "@components/ui/headline";
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
         Tinder restaurant
       </Headline>
 
-      <CreateRoom />
+      <RoomCreate />
     </main>
   );
 }

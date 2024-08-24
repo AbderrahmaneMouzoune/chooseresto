@@ -6,10 +6,10 @@ import { FormItem } from "@components/ui/form";
 import { Input } from "@components/ui/input";
 import { micah } from "@dicebear/collection";
 import { createAvatar } from "@dicebear/core";
-import RestaurantGenerator from "@layouts/restaurant-generator";
 import { PlayIcon, ReloadIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import { useState } from "react";
+import RoomLocalisation from "./room-localisation";
 
 const possibleAvatar = [
   "Princess",
@@ -21,7 +21,7 @@ const possibleAvatar = [
   "Buddy",
 ];
 
-export default function CreateRoom() {
+export default function RoomCreate() {
   const avatarName =
     possibleAvatar[(Math.random() * 100) % possibleAvatar.length];
   const avatar = createAvatar(micah, {
@@ -58,7 +58,7 @@ export default function CreateRoom() {
             {restaurants === undefined && "Choisir la liste de restaurants"}
           </RestaurantButton>
 
-          <RestaurantGenerator />
+          <RoomLocalisation />
         </Drawer>
 
         <Button className="w-full" disabled={cantCreateRoom}>
