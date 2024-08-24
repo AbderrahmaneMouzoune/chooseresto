@@ -1,5 +1,5 @@
-import BlockManager from "@/components/strapi/BlockManager";
 import { getPageBySlug } from "@/data-access/page.action";
+import BlockManager from "@components/strapi/BlockManager";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { strapiGetMetaData, strapiGetUrlFromSlug } from "../../lib/api/strapi";

@@ -4,6 +4,7 @@ import Link from "next/link";
 import * as React from "react";
 
 import { APP_CONFIG } from "@/app.config";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -12,8 +13,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
+} from "@components/ui/breadcrumb";
+import { Button } from "@components/ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -23,14 +24,13 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer";
+} from "@components/ui/drawer";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useMediaQuery } from "@/hooks/use-media-query";
+} from "@components/ui/dropdown-menu";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { useCallback } from "react";
 import type {
