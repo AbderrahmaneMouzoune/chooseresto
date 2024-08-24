@@ -4,7 +4,7 @@ import type {
   Common,
   GetValues,
   StrapiUrlParams,
-} from "@nextjs-strapi-boilerplate/backend";
+} from "@chooseresto/backend";
 import type { Metadata } from "next";
 import qs from "qs";
 

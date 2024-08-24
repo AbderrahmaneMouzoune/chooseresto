@@ -49,7 +49,7 @@ export default function Home() {
           <Button size={"lg"} asChild>
             <Link
               href={
-                "https://github.com/Ahmed-Mouzoune/nextjs-strapi-boilerplate"
+                "https://github.com/Ahmed-Mouzoune/chooseresto"
               }
             >
               Démarrer
@@ -58,7 +58,7 @@ export default function Home() {
           <Button size={"lg"} variant={"outline"} asChild>
             <Link
               href={
-                "https://github.com/Ahmed-Mouzoune/nextjs-strapi-boilerplate"
+                "https://github.com/Ahmed-Mouzoune/chooseresto"
               }
             >
               <GitHubLogoIcon className="mr-2 size-5" /> Mettre une ⭐ sur

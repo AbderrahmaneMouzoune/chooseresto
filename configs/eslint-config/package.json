@@ -1,5 +1,5 @@
 {
-  "name": "@nextjs-strapi-boilerplate/eslint-config",
+  "name": "@chooseresto/eslint-config",
   "version": "1.0.0",
   "private": true,
   "description": "ESLint config",
@@ -13,7 +13,7 @@
     "format": "prettier --check \"**/*.{js,json}\"",
     "lint": "eslint ."
   },
-  "prettier": "@nextjs-strapi-boilerplate/prettier-config",
+  "prettier": "@chooseresto/prettier-config",
   "dependencies": {
     "@next/eslint-plugin-next": "^14.0.4",
     "@types/eslint": "^8.44.8",
@@ -27,8 +27,8 @@
     "eslint-plugin-react-hooks": "^4.6.0"
   },
   "devDependencies": {
-    "@nextjs-strapi-boilerplate/prettier-config": "*",
-    "@nextjs-strapi-boilerplate/tsconfig": "*",
+    "@chooseresto/prettier-config": "*",
+    "@chooseresto/tsconfig": "*",
     "eslint": "^8.55.0",
     "typescript": "^5.3.3"
   }

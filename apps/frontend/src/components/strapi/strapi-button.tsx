@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import type { GetValues } from "@nextjs-strapi-boilerplate/backend";
+import type { GetValues } from "@chooseresto/backend";
 import Link from "next/link";
 
 type StrapiButtonProps = GetValues<"block.button">;

@@ -1,5 +1,5 @@
 {
-  "name": "@nextjs-strapi-boilerplate/prettier-config",
+  "name": "@chooseresto/prettier-config",
   "version": "1.0.0",
   "private": true,
   "description": "prettier config",
@@ -20,7 +20,7 @@
     "prettier-plugin-tailwindcss": "^0.6.6"
   },
   "devDependencies": {
-    "@nextjs-strapi-boilerplate/tsconfig": "*",
+    "@chooseresto/tsconfig": "*",
     "prettier": "^3.1.1",
     "typescript": "^5.3.3"
   }

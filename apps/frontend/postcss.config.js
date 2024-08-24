@@ -1,1 +1,1 @@
-module.exports = require("@nextjs-strapi-boilerplate/tailwind-config/postcss.config");
+module.exports = require("@chooseresto/tailwind-config/postcss.config");

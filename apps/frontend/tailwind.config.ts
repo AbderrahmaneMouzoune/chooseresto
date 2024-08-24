@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-import baseConfig from "@nextjs-strapi-boilerplate/tailwind-config";
+import baseConfig from "@chooseresto/tailwind-config";
 
 export default {
   content: [

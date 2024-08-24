@@ -1,5 +1,5 @@
 {
-  "name": "@nextjs-strapi-boilerplate/frontend",
+  "name": "@chooseresto/frontend",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "lint": "next lint",
     "start": "next start"
   },
-  "prettier": "@nextjs-strapi-boilerplate/prettier-config/tailwindcss.mjs",
+  "prettier": "@chooseresto/prettier-config/tailwindcss.mjs",
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
@@ -32,10 +32,10 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@nextjs-strapi-boilerplate/backend": "*",
-    "@nextjs-strapi-boilerplate/eslint-config": "*",
-    "@nextjs-strapi-boilerplate/prettier-config": "*",
-    "@nextjs-strapi-boilerplate/tailwind-config": "*",
+    "@chooseresto/backend": "*",
+    "@chooseresto/eslint-config": "*",
+    "@chooseresto/prettier-config": "*",
+    "@chooseresto/tailwind-config": "*",
     "@types/node": "^20",
     "@types/qs": "^6.9.15",
     "@types/react": "^18",

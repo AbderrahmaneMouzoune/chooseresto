@@ -1,5 +1,5 @@
 {
-  "name": "@nextjs-strapi-boilerplate/tailwind-config",
+  "name": "@chooseresto/tailwind-config",
   "version": "1.0.0",
   "private": true,
   "description": "tailwind CSS config",
@@ -14,7 +14,7 @@
     "format": "prettier --check \"**/*.{mjs,ts,md,json}\"",
     "lint": "eslint ."
   },
-  "prettier": "@nextjs-strapi-boilerplate/prettier-config",
+  "prettier": "@chooseresto/prettier-config",
   "dependencies": {
     "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.16",
@@ -23,9 +23,9 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@nextjs-strapi-boilerplate/eslint-config": "*",
-    "@nextjs-strapi-boilerplate/prettier-config": "*",
-    "@nextjs-strapi-boilerplate/tsconfig": "*",
+    "@chooseresto/eslint-config": "*",
+    "@chooseresto/prettier-config": "*",
+    "@chooseresto/tsconfig": "*",
     "eslint": "^8",
     "prettier": "^3.1.1",
     "typescript": "^5"

@@ -1,7 +1,7 @@
 "use server";
 
 import { strapiFetcher } from "@/lib/api/strapi";
-import type { StrapiResponseCollection } from "@nextjs-strapi-boilerplate/backend";
+import type { StrapiResponseCollection } from "@chooseresto/backend";
 
 export async function getArticles(): Promise<
   StrapiResponseCollection<"api::article.article">

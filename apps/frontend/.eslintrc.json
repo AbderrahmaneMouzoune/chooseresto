@@ -1,8 +1,8 @@
 {
   "root": true,
   "extends": [
-    "@nextjs-strapi-boilerplate/eslint-config/base",
-    "@nextjs-strapi-boilerplate/eslint-config/nextjs",
-    "@nextjs-strapi-boilerplate/eslint-config/react"
+    "@chooseresto/eslint-config/base",
+    "@chooseresto/eslint-config/nextjs",
+    "@chooseresto/eslint-config/react"
   ]
 }

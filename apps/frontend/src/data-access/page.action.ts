@@ -5,7 +5,7 @@ import type {
   StrapiResponseCollection,
   StrapiResponseData,
   StrapiUrlParams,
-} from "@nextjs-strapi-boilerplate/backend";
+} from "@chooseresto/backend";
 
 export async function getPageBySlug(
   slug: string,
