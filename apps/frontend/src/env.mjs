@@ -9,6 +9,7 @@ export const env = createEnv({
     NODE_ENV: z.enum(["development", "test", "production"]),
     STRAPI_API_PUBLIC_TOKEN: z.string().optional(),
     STRAPI_URL: z.string().optional(),
+    GEOCODE_MAPS_API_KEY: z.string().optional(),
   },
   /*
    * Environment variables available on the client (and server).

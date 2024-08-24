@@ -1,5 +1,8 @@
 "use client";
 
+import { LoaderButton } from "@/components/ui/loader-button";
+import { useToast } from "@/components/ui/use-toast";
+import useGeoLocation from "@/lib/hooks/use-geolocation";
 import { Button } from "@components/ui/button";
 import {
   DrawerClose,
@@ -18,44 +21,67 @@ import {
 } from "@components/ui/form";
 import { Input } from "@components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useGeoLocation from "@hooks/use-geolocation";
 import { MapPin } from "lucide-react";
+import type { MouseEventHandler } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { z } from "zod";
+import { useServerAction } from "zsa-react";
+import { getPlacesFromAddressAction } from "./action";
 
-const formSchema = z.object({
+const geocodeLocationSchema = z.object({
   address: z.string().min(5).max(100),
 });
 
-export default function RoomLocalisation() {
-  const [places, setPlaces] = useState<GeocodeMaps[]>([]);
-  const { updateLocation, getLocation } = useGeoLocation();
+interface RoomLocalisationProps {
+  updateLocation({ lat, lon }: { lat: number; lon: number }): void;
+}
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+export default function RoomLocalisation({
+  updateLocation,
+}: RoomLocalisationProps) {
+  const { toast } = useToast();
+  const [places, setPlaces] = useState<GeocodeMaps[]>([]);
+
+  const { execute, isPending } = useServerAction(getPlacesFromAddressAction, {
+    onSuccess({ data }) {
+      setPlaces(data);
+    },
+    onError({ err }) {
+      toast({
+        title: "Oops une erreur...",
+        description: err.message,
+        variant: "destructive",
+      });
+    },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    fetch(`/api/map/address?address=${values.address}`)
-      .then((response) => {
-        if (!response.ok)
-          throw new Error(
-            "Une erreur est survenue pour essayer de récupérer l'adress",
-          );
-        return response.json();
-      })
-      .then((data) => {
-        toast.success(
-          `${data.length} possible adresse récupéré veuillez choisir la bonne`,
-        );
-        setPlaces(data);
-      })
-      .catch((error) => {
-        toast.error(`Une erreur est survenu`);
-        console.error("Erreur survenu ", error);
+  const { getLocation, error } = useGeoLocation((location) => {
+    if (location.latitude !== null && location.longitude !== null) {
+      updateLocation({
+        lat: location.latitude,
+        lon: location.longitude,
       });
+    }
+  });
+
+  if (error) {
+    toast({
+      title: "Oops une erreur...",
+      description: error,
+      variant: "destructive",
+    });
+  }
+
+  const form = useForm<z.infer<typeof geocodeLocationSchema>>({
+    resolver: zodResolver(geocodeLocationSchema),
+    defaultValues: {
+      address: "",
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof geocodeLocationSchema>) {
+    execute(values);
   }
 
   return (
@@ -79,9 +105,9 @@ export default function RoomLocalisation() {
               </FormItem>
             )}
           />
-          <Button className="w-full" type="submit">
+          <LoaderButton className="w-full" type="submit" isLoading={isPending}>
             Valider mon addresse
-          </Button>
+          </LoaderButton>
         </form>
       </Form>
 
@@ -92,29 +118,40 @@ export default function RoomLocalisation() {
         </Button>
       </DrawerClose>
 
-      <DrawerFooter>
-        {places.length > 0 && (
+      {places.length > 0 && (
+        <DrawerFooter>
           <ul className="mt-2 space-y-1 overflow-auto">
             {places.map((place) => (
-              <DrawerClose key={place.place_id} asChild>
-                <Button
-                  className="h-fit whitespace-normal"
-                  onClick={() => {
-                    if (Number(place.lat) && Number(place.lon)) {
-                      updateLocation({
-                        longitude: Number(place.lon),
-                        latitude: Number(place.lat),
-                      });
-                    }
-                  }}
-                >
-                  {place.display_name}
-                </Button>
-              </DrawerClose>
+              <Place
+                key={place.place_id}
+                props={place}
+                onClick={() =>
+                  updateLocation({
+                    lat: Number(place.lat),
+                    lon: Number(place.lon),
+                  })
+                }
+              />
             ))}
           </ul>
-        )}
-      </DrawerFooter>
+        </DrawerFooter>
+      )}
     </DrawerContent>
+  );
+}
+
+function Place({
+  props,
+  onClick,
+}: {
+  props: Pick<GeocodeMaps, "display_name">;
+  onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
+}) {
+  return (
+    <DrawerClose asChild>
+      <Button className="h-fit whitespace-normal" onClick={onClick}>
+        {props.display_name}
+      </Button>
+    </DrawerClose>
   );
 }

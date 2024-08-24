@@ -30,6 +30,13 @@ export default function RoomCreate() {
 
   const [restaurants] = useState<string[] | undefined>(undefined);
   const cantCreateRoom = true;
+  const [geolocationPoints, setGeolocationPoints] = useState<{
+    lat?: number;
+    lon?: number;
+  }>({
+    lat: undefined,
+    lon: undefined,
+  });
 
   return (
     <Card>
@@ -58,7 +65,11 @@ export default function RoomCreate() {
             {restaurants === undefined && "Choisir la liste de restaurants"}
           </RestaurantButton>
 
-          <RoomLocalisation />
+          <RoomLocalisation
+            updateLocation={({ lat, lon }) =>
+              setGeolocationPoints({ lat, lon })
+            }
+          />
         </Drawer>
 
         <Button className="w-full" disabled={cantCreateRoom}>

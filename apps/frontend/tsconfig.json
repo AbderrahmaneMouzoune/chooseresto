@@ -7,7 +7,8 @@
       "@public/*": ["public/*"],
       "@hooks/*": ["src/lib/hooks/*"],
       "@layouts/*": ["src/components/layouts/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@lib/*": ["src/lib/*"]
     },
     "plugins": [{ "name": "next" }]
   },

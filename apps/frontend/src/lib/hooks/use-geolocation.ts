@@ -12,7 +12,9 @@ interface GeoLocationProps {
   updateLocation: ({ longitude, latitude }: TLocation) => void;
 }
 
-const useGeoLocation = (): GeoLocationProps => {
+const useGeoLocation = (
+  onLocationUpdate?: (location: TLocation) => void,
+): GeoLocationProps => {
   const [location, setLocation] = useState<TLocation>({
     latitude: null,
     longitude: null,
@@ -21,6 +23,9 @@ const useGeoLocation = (): GeoLocationProps => {
 
   const onLocationChange = (location: TLocation) => {
     setLocation(location);
+    if (onLocationUpdate) {
+      onLocationUpdate(location);
+    }
   };
 
   const handleSuccess = (position: GeolocationPosition) => {
