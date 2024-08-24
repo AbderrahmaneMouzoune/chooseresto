@@ -17,12 +17,19 @@ export async function getRoomById(
           $eq: roomId,
         },
       },
-      populate: ["creator"],
+      populate: ["creator", "participants"],
     })) as StrapiResponseCollection<"api::room.room">;
 
-    console.log(response);
     return response?.data?.[0];
   } catch (error) {
     throw new NotFoundError();
   }
+}
+
+export async function getRooms(): Promise<
+  StrapiResponseCollection<"api::room.room">
+> {
+  return await strapiFetcher("api::room.room", {
+    populate: ["participants", "creator"],
+  });
 }

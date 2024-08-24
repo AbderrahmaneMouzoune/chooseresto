@@ -1,6 +1,7 @@
 import { Headline } from "@/components/ui/headline";
 import { formatDate } from "@/lib/utils";
 import { getRoomByIdUseCase } from "@/use-cases/room";
+import { Participant } from "../participants";
 
 interface PageProps {
   params: {
@@ -14,19 +15,26 @@ export default async function PageRoot({ params }: PageProps) {
   return (
     <main className="container space-y-2">
       <Headline variant={"h1"} className="text-center">
-        {room.attributes.name}
+        {room.name}
       </Headline>
       <Headline variant={"p"}>
         crée le{" "}
-        {room.attributes.createdAt &&
-          formatDate(new Date(room.attributes.createdAt), "dd/mm à HH:mm")}{" "}
+        {room.createdAt &&
+          formatDate(new Date(room.createdAt), "dd/mm à HH:mm")}{" "}
         par{" "}
         <span className="text-primary">
-          {room.attributes.creator?.data?.attributes?.name}
+          {room.creator?.data?.attributes?.name}
         </span>
       </Headline>
 
-      <section className=""></section>
+      <section className="grid grid-cols-2 gap-2">
+        {room.participants?.data.map((participant, index) => (
+          <Participant
+            key={`participant-${index}`}
+            name={participant.attributes.name}
+          />
+        ))}
+      </section>
     </main>
   );
 }
