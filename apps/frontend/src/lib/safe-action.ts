@@ -23,7 +23,7 @@ function shapeErrors({ err }: any) {
   }
 }
 
-export const unauthenticatedAction = createServerActionProcedure()
+export const middlewareAction = createServerActionProcedure()
   .experimental_shapeError(shapeErrors)
   .handler(async () => {
     await rateLimitByKey({

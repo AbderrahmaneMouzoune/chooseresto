@@ -10,6 +10,7 @@ export const env = createEnv({
     STRAPI_API_PUBLIC_TOKEN: z.string().optional(),
     STRAPI_URL: z.string().optional(),
     GEOCODE_MAPS_API_KEY: z.string().optional(),
+    GOOGLE_API_KEY: z.string().optional(),
   },
   /*
    * Environment variables available on the client (and server).

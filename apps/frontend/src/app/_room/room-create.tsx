@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
+import { toast } from "@/components/ui/use-toast";
 import { Card, CardContent, CardHeader } from "@components/ui/card";
 import { FormItem } from "@components/ui/form";
 import { Input } from "@components/ui/input";
@@ -9,7 +10,14 @@ import { createAvatar } from "@dicebear/core";
 import { PlayIcon, ReloadIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import { useState } from "react";
+import { useServerAction } from "zsa-react";
+import { getRestaurantsFromGeoPointsAction } from "./action";
 import RoomLocalisation from "./room-localisation";
+
+interface GeoLocation {
+  lat?: number;
+  lon?: number;
+}
 
 const possibleAvatar = [
   "Princess",
@@ -28,15 +36,45 @@ export default function RoomCreate() {
     seed: avatarName,
   });
 
-  const [restaurants] = useState<string[] | undefined>(undefined);
-  const cantCreateRoom = true;
-  const [geolocationPoints, setGeolocationPoints] = useState<{
-    lat?: number;
-    lon?: number;
-  }>({
-    lat: undefined,
-    lon: undefined,
-  });
+  const [restaurants, setRestaurants] = useState<Restaurant[] | undefined>(
+    undefined,
+  );
+
+  const { execute, isPending } = useServerAction(
+    getRestaurantsFromGeoPointsAction,
+    {
+      onSuccess({ data }) {
+        toast({
+          title: `On a trouvé des resto !`,
+          description: `Quel sera le resto chosisis parmis les ${data.length} resto ?`,
+          variant: "success",
+        });
+        setRestaurants(data);
+      },
+      onError({ err }) {
+        toast({
+          title: "Oops une erreur...",
+          description: err.message,
+          variant: "destructive",
+        });
+      },
+    },
+  );
+
+  const cantCreateRoom = isPending || !restaurants?.length;
+
+  const onGeolocationUpdate = ({ lat, lon }: GeoLocation) => {
+    if (lat === undefined || lon === undefined) {
+      return toast({
+        title: "Oops une erreur...",
+        description:
+          "Il semblerais qu'on n'est pas réussi à récupérer vos coordonnée",
+        variant: "destructive",
+      });
+    }
+
+    execute({ lon, lat });
+  };
 
   return (
     <Card>
@@ -65,11 +103,7 @@ export default function RoomCreate() {
             {restaurants === undefined && "Choisir la liste de restaurants"}
           </RestaurantButton>
 
-          <RoomLocalisation
-            updateLocation={({ lat, lon }) =>
-              setGeolocationPoints({ lat, lon })
-            }
-          />
+          <RoomLocalisation updateLocation={onGeolocationUpdate} />
         </Drawer>
 
         <Button className="w-full" disabled={cantCreateRoom}>

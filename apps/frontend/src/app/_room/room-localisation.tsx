@@ -106,7 +106,7 @@ export default function RoomLocalisation({
             )}
           />
           <LoaderButton className="w-full" type="submit" isLoading={isPending}>
-            Valider mon addresse
+            Valider mon adresse
           </LoaderButton>
         </form>
       </Form>
