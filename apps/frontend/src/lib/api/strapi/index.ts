@@ -1,5 +1,6 @@
 import { APP_CONFIG, FALLBACK_SEO } from "@/app.config";
 import { env } from "@/env.mjs";
+import { StrapiError } from "@/use-cases/error";
 import type { GetValues, StrapiUrlParams } from "@chooseresto/backend";
 import type { Metadata } from "next";
 import qs from "qs";
@@ -78,8 +79,6 @@ export function strapiGetUrlFromSlug(
   entity?: ApiContentTypeUid,
 ): string {
   switch (entity) {
-    case "api::article.article":
-      return `${APP_CONFIG.website}/articles/${slug}`;
     default:
       return `${APP_CONFIG.website}/${slug}`;
   }
@@ -137,8 +136,6 @@ export async function strapiFetcher<
     return data;
   } catch (error) {
     console.error(error);
-    throw new Error(
-      `Please check if your strapi server is running and you set all the required tokens.`,
-    );
+    throw new StrapiError();
   }
 }

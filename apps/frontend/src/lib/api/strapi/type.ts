@@ -8,6 +8,7 @@ export type ApiContentTypeUid = Extract<
 export const API_ENDPOINTS: {
   [K in ApiContentTypeUid]: string;
 } = {
-  "api::article.article": "/articles",
   "api::page.page": "/pages",
+  "api::room.room": "/rooms",
+  "api::participant.participant": "/participants",
 };

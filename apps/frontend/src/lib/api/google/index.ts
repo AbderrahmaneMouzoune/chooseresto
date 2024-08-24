@@ -1,4 +1,5 @@
 import { env } from "@/env.mjs";
+import { GoogleError } from "@/use-cases/error";
 import qs from "qs";
 import type { GoogleApiResponse } from "./type";
 
@@ -8,7 +9,7 @@ export async function fetcherGoogleMap(
   options = {},
 ) {
   if (!env.GOOGLE_API_KEY) {
-    throw new Error("No Google Api Key");
+    throw new GoogleError();
   }
 
   try {
@@ -36,9 +37,7 @@ export async function fetcherGoogleMap(
     return data;
   } catch (error) {
     console.error(error);
-    throw new Error(
-      `Please check if your server is running and you set all the required tokens.`,
-    );
+    throw new GoogleError();
   }
 }
 

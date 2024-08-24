@@ -879,78 +879,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   }
 }
 
-export interface ApiArticleArticle extends Schema.CollectionType {
-  collectionName: 'articles'
-  info: {
-    singularName: 'article'
-    pluralName: 'articles'
-    displayName: 'Article'
-    description: ''
-  }
-  options: {
-    draftAndPublish: true
-  }
-  pluginOptions: {
-    i18n: {
-      localized: true
-    }
-  }
-  attributes: {
-    slug: Attribute.UID<'api::article.article', 'title'> &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    description: Attribute.Text &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    image: Attribute.Media<'images' | 'videos'> &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    createdAt: Attribute.DateTime
-    updatedAt: Attribute.DateTime
-    publishedAt: Attribute.DateTime
-    createdBy: Attribute.Relation<
-      'api::article.article',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private
-    updatedBy: Attribute.Relation<
-      'api::article.article',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private
-    sitemap_exclude: Attribute.Boolean &
-      Attribute.Private &
-      Attribute.DefaultTo<false>
-    localizations: Attribute.Relation<
-      'api::article.article',
-      'oneToMany',
-      'api::article.article'
-    >
-    locale: Attribute.String
-  }
-}
-
 export interface ApiPagePage extends Schema.CollectionType {
   collectionName: 'pages'
   info: {
@@ -1017,6 +945,79 @@ export interface ApiPagePage extends Schema.CollectionType {
   }
 }
 
+export interface ApiParticipantParticipant extends Schema.CollectionType {
+  collectionName: 'participants'
+  info: {
+    singularName: 'participant'
+    pluralName: 'participants'
+    displayName: 'Participant'
+    description: ''
+  }
+  options: {
+    draftAndPublish: false
+  }
+  attributes: {
+    name: Attribute.String & Attribute.Required
+    room: Attribute.Relation<
+      'api::participant.participant',
+      'oneToOne',
+      'api::room.room'
+    >
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'api::participant.participant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'api::participant.participant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    sitemap_exclude: Attribute.Boolean &
+      Attribute.Private &
+      Attribute.DefaultTo<false>
+  }
+}
+
+export interface ApiRoomRoom extends Schema.CollectionType {
+  collectionName: 'rooms'
+  info: {
+    singularName: 'room'
+    pluralName: 'rooms'
+    displayName: 'Room'
+    description: ''
+  }
+  options: {
+    draftAndPublish: false
+  }
+  attributes: {
+    name: Attribute.String & Attribute.Required
+    participants: Attribute.Relation<
+      'api::room.room',
+      'oneToMany',
+      'api::participant.participant'
+    >
+    creator: Attribute.Relation<
+      'api::room.room',
+      'oneToOne',
+      'api::participant.participant'
+    >
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<'api::room.room', 'oneToOne', 'admin::user'> &
+      Attribute.Private
+    updatedBy: Attribute.Relation<'api::room.room', 'oneToOne', 'admin::user'> &
+      Attribute.Private
+    sitemap_exclude: Attribute.Boolean &
+      Attribute.Private &
+      Attribute.DefaultTo<false>
+  }
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1037,8 +1038,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission
       'plugin::users-permissions.role': PluginUsersPermissionsRole
       'plugin::users-permissions.user': PluginUsersPermissionsUser
-      'api::article.article': ApiArticleArticle
       'api::page.page': ApiPagePage
+      'api::participant.participant': ApiParticipantParticipant
+      'api::room.room': ApiRoomRoom
     }
   }
 }

@@ -1,3 +1,4 @@
+import RoomCreate from "@/app/room/room-create";
 import { Headline } from "@components/ui/headline";
 
 export default function Home() {
@@ -6,6 +7,8 @@ export default function Home() {
       <Headline variant={"h1"} className="text-center">
         Tinder restaurant
       </Headline>
+
+      <RoomCreate />
     </main>
   );
 }
