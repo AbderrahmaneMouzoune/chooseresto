@@ -5,7 +5,8 @@ import Footer from "@/app/shared/footer";
 import Header from "@/app/shared/header";
 
 import { FALLBACK_SEO } from "@/app.config";
-import { inter } from "@/app/fonts";
+import { lexend } from "@/app/fonts";
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import { BreadcrumbResponsive } from "./layouts/breadcrumb";
@@ -38,7 +39,7 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          inter.className,
+          lexend.className,
           "flex min-h-screen flex-col justify-between bg-background text-foreground",
         )}
       >
@@ -46,6 +47,7 @@ export default function RootLayout({
           <Header />
           <BreadcrumbResponsive />
           {children}
+          <Toaster />
           <Footer />
         </ThemeProvider>
       </body>
