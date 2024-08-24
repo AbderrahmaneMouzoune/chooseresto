@@ -1,4 +1,4 @@
-import CreateRoom from "@/app/layouts/create-room";
+import CreateRoom from "@/components/layouts/create-room";
 import { Headline } from "@components/ui/headline";
 
 export default function Home() {

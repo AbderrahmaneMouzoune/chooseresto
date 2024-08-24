@@ -1,14 +1,14 @@
-import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata, Viewport } from "next";
 
 import { DEFAULT_VIEWPORT, FALLBACK_SEO } from "@/app.config";
 import { lexend } from "@/app/fonts";
+import BreadcrumbResponsive from "@/components/layouts/breadcrumb";
+import Footer from "@/components/layouts/footer";
+import Header from "@/components/layouts/header";
 import { cn } from "@/lib/utils";
+import { Providers } from "@/providers/providers";
 import "@/styles/globals.css";
 import { Toaster } from "@components/ui/sonner";
-import BreadcrumbResponsive from "@layouts/breadcrumb";
-import Footer from "@layouts/footer";
-import Header from "@layouts/header";
 
 export const metadata: Metadata = {
   ...FALLBACK_SEO,
@@ -34,13 +34,13 @@ export default function RootLayout({
           "bg-gray-100 dark:bg-gray-900",
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <Providers>
           <Header />
           <BreadcrumbResponsive />
           {children}
           <Toaster />
           <Footer />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

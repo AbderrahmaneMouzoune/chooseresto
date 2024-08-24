@@ -1,12 +1,15 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { Card, CardContent, CardHeader } from "@components/ui/card";
 import { FormItem } from "@components/ui/form";
 import { Input } from "@components/ui/input";
 import { micah } from "@dicebear/collection";
 import { createAvatar } from "@dicebear/core";
-import { PlayIcon } from "@radix-ui/react-icons";
+import RestaurantGenerator from "@layouts/restaurant-generator";
+import { PlayIcon, ReloadIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
+import { useState } from "react";
 
 const possibleAvatar = [
   "Princess",
@@ -25,6 +28,7 @@ export default function CreateRoom() {
     seed: avatarName,
   });
 
+  const [restaurants] = useState<string[] | undefined>(undefined);
   const cantCreateRoom = true;
 
   return (
@@ -45,9 +49,17 @@ export default function CreateRoom() {
           <Input placeholder={"CoolRat"} />
         </FormItem>
 
-        <Button className="w-full" variant={"secondary"}>
-          Choisir la liste de restaurant
-        </Button>
+        <Drawer>
+          <RestaurantButton>
+            {restaurants?.length === 0 && "Pas de resto trouvé, réessayer"}
+            {restaurants &&
+              restaurants.length > 0 &&
+              `${restaurants.length} restaurants trouvé`}
+            {restaurants === undefined && "Choisir la liste de restaurants"}
+          </RestaurantButton>
+
+          <RestaurantGenerator />
+        </Drawer>
 
         <Button className="w-full" disabled={cantCreateRoom}>
           <PlayIcon className="mr-2 size-4" />
@@ -55,5 +67,22 @@ export default function CreateRoom() {
         </Button>
       </CardContent>
     </Card>
+  );
+}
+
+function RestaurantButton({
+  isLoading = false,
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+  isLoading?: boolean;
+}>) {
+  return (
+    <DrawerTrigger asChild>
+      <Button className="w-full" variant={"secondary"} disabled={isLoading}>
+        {isLoading && <ReloadIcon className={"mr-2 size-4 animate-spin"} />}
+        {children}
+      </Button>
+    </DrawerTrigger>
   );
 }
