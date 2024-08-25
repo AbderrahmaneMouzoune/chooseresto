@@ -29,6 +29,5 @@ export async function getRooms(): Promise<
       populate: ["participants", "creator"],
     });
 
-  console.log(response);
   return response.data || [];
 }
