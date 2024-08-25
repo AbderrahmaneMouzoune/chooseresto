@@ -1,38 +1,36 @@
 import { getRoomById, getRooms } from "@/data-access/room";
-import type { GetValues, StrapiResponseData } from "@chooseresto/backend";
-import { PublicError } from "./error";
+import type { Room } from "@/data-access/room/type";
+import { roomAdapter } from "@/data-access/room/type";
+import { PublicError, StrapiError } from "./error";
 
-export type TRoom = GetValues<"api::room.room"> & {
-  id: number;
-};
+export async function getRoomByIdUseCase(roomId: string): Promise<Room> {
+  const roomUnformatted = await getRoomById(roomId);
 
-function roomAdapter(room: StrapiResponseData<"api::room.room">): TRoom {
-  return {
-    id: room.id,
-    name: room.attributes.name,
-    participants: room.attributes.participants,
-    creator: room.attributes.creator,
-    createdAt: room.attributes.createdAt,
-    updatedAt: room.attributes.updatedAt,
-  };
-}
-
-export async function getRoomByIdUseCase(roomId: string): Promise<TRoom> {
-  const room = await getRoomById(roomId);
-
-  if (!room) {
+  if (!roomUnformatted) {
     throw new PublicError("Room not found");
   }
 
-  return roomAdapter(room);
+  const room = roomAdapter(roomUnformatted);
+
+  if (!room) {
+    throw new StrapiError("Error while mapping [room] data");
+  }
+
+  return room;
 }
 
-export async function getRoomsUseCase(): Promise<TRoom[]> {
-  const rooms = await getRooms();
+export async function getRoomsUseCase(): Promise<Room[]> {
+  const roomsUnformatted = await getRooms();
 
-  if (!rooms) {
+  if (!roomsUnformatted) {
     throw new PublicError("No rooms");
   }
 
-  return rooms.data.map(roomAdapter);
+  const rooms = roomsUnformatted.map(roomAdapter);
+
+  if (!rooms) {
+    throw new StrapiError("Error while mapping [rooms] data");
+  }
+
+  return rooms;
 }

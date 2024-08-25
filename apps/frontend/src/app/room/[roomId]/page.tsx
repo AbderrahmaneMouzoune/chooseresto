@@ -1,7 +1,7 @@
 import { Headline } from "@/components/ui/headline";
 import { formatDate } from "@/lib/utils";
 import { getRoomByIdUseCase } from "@/use-cases/room";
-import { Participant } from "../participants";
+import { Participant } from "../_room/participants";
 
 interface PageProps {
   params: {

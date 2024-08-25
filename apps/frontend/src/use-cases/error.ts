@@ -1,3 +1,5 @@
+import { env } from "@/env.mjs";
+
 export class PublicError extends Error {
   constructor(message: string) {
     super(message);
@@ -19,8 +21,8 @@ export class GoogleError extends PublicError {
 }
 
 export class StrapiError extends PublicError {
-  constructor() {
-    super("Strapi Error");
+  constructor(message: string) {
+    super(env.NODE_ENV === "development" ? message : "Strapi Error");
     this.name = "StrapiError";
   }
 }

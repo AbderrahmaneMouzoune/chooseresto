@@ -1,6 +1,6 @@
 import { getRoomsUseCase } from "@/use-cases/room";
 import { Headline } from "@components/ui/headline";
-import Rooms from "./room/rooms";
+import Rooms from "./room/_room/room";
 
 export default async function Home() {
   const rooms = await getRoomsUseCase();
