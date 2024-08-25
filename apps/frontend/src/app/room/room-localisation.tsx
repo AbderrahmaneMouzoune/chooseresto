@@ -2,6 +2,7 @@
 
 import { LoaderButton } from "@/components/ui/loader-button";
 import { useToast } from "@/components/ui/use-toast";
+import type { GeocodeMaps } from "@/lib/api/geocode/type";
 import useGeoLocation from "@/lib/hooks/use-geolocation";
 import { Button } from "@components/ui/button";
 import {

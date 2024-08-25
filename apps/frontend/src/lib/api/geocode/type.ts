@@ -1,4 +1,4 @@
-interface GeocodeMaps {
+export interface GeocodeMaps {
   place_id: number;
   licence: string;
   osm_type: string;

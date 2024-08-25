@@ -1,4 +1,5 @@
 import { env } from "@/env.mjs";
+import type { GeocodeMaps } from "./type";
 
 export async function getGeoCodeFromAddress(
   address: string,
