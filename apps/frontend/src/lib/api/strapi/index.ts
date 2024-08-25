@@ -95,7 +95,7 @@ function getStrapiApiByUid(uid: ApiContentTypeUid): string {
     return path;
   }
 
-  throw new Error(
+  throw new StrapiError(
     `Endpoint for UID "${uid}" not found. Extend API_ENDPOINTS in src/utils/strapi-fetcher`,
   );
 }
@@ -130,12 +130,17 @@ export async function strapiFetcher<
       await delay(1000);
     }
 
-    // Trigger API call
     const response = await fetch(requestUrl, mergedOptions);
+
+    if (response.status === 401) {
+      throw new StrapiError("UnauthorizedError");
+    }
+
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error);
-    throw new StrapiError();
+    throw new StrapiError(
+      "Please check if your strapi server is running and you set all the required tokens.",
+    );
   }
 }

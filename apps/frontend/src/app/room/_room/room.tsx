@@ -8,7 +8,8 @@ import {
 } from "@/components/ui/card";
 import { Headline } from "@/components/ui/headline";
 import { formatDate } from "@/lib/utils";
-import type { TRoom } from "@/use-cases/room";
+
+import type { Room as TRoom } from "@/data-access/room/type";
 import Link from "next/link";
 import type { TParticipant } from "./participants";
 import Participants from "./participants";

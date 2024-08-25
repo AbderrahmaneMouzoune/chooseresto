@@ -1,4 +1,4 @@
-import RoomCreate from "@/app/room/room-create";
+import RoomCreate from "@/app/room/_room/room-create";
 import { Headline } from "@components/ui/headline";
 
 export default function Home() {

@@ -958,7 +958,7 @@ export interface ApiParticipantParticipant extends Schema.CollectionType {
   }
   attributes: {
     name: Attribute.String & Attribute.Required
-    room: Attribute.Relation<
+    roomOwnerOf: Attribute.Relation<
       'api::participant.participant',
       'oneToOne',
       'api::room.room'
