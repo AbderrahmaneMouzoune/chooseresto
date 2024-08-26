@@ -67,7 +67,7 @@ function Room({ room }: RoomProps) {
       {room.createdAt && (
         <CardFooter>
           <CardDescription>
-            Room created @{formatDate(new Date(room.createdAt), "dd/mm hh:mm")}
+            Room created @{formatDate(new Date(room.createdAt), "dd/MM HH:mm")}
           </CardDescription>
         </CardFooter>
       )}
